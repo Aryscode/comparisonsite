@@ -1,0 +1,212 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <style>
+        <%- include("../public/App.css")%>
+        </style>
+  </head>
+  <body>
+    <div id="mydiv1223"></div>
+    <script type="text/babel">
+        const submitbuttonstyle={
+    backgroundColor:'light grey',
+    color:'white',
+    margin: '35px 35px 5px 20px',
+    padding: '20px 45px',
+    fontSize:"20px"
+}
+const cancelbuttonstyle={
+    backgroundColor:'Gray',
+    color:'White',
+    margin: '20px',
+    fontSize:"20px",
+    padding: '20px 45px',
+    position:'relative',
+    left:"32%",
+    bottom:80,
+}
+class Whatdo extends React.Component {
+    Stylee=(tod)=>{
+        if(tod.dojob)
+        { return(
+        <div>What Do You Do?
+            <select name="Profession" 
+           class="input" value={this.props.person[0].Profession} onChange={this.props.gohs4}>
+         
+         </select>
+         </div>)}
+    }
+    render()
+    {
+        return(
+            <div>
+                {this.Stylee(this.props.person[0])}
+            </div>
+        )
+    }
+}
+class Userpro extends React.Component{
+    render()
+    {return(<div>
+        Register As
+		<select name="Role" onChange={this.props.dojob1} 
+		class="input">
+       <option value="User">User</option>
+      </select>
+    </div>)
+}
+}
+class Gotoprofile extends React.Component{
+    render()
+    {
+     var re = new RegExp("[A-Z]{1}[A-Za-z]*");
+     var re2= new RegExp("[0-9]{6}");
+     var re4=new RegExp("[A-Za-z]*");
+     var re3= new RegExp("[0-9]{10}");
+        if(re.test(this.props.person[0].Name) && re3.test(parseInt(this.props.person[0].MobileNumber)) && re4.test(this.props.person[0].Password) && re4.test(this.props.person[0].City) && re2.test(this.props.person[0].Pincode) && re4.test(this.props.person[0].Address))
+        {
+            return(
+ <button style={submitbuttonstyle}>Proceed and Login</button>)
+}
+else
+{
+    return(<button style={submitbuttonstyle} disabled>Proceed and Login</button>)
+}
+}
+}
+class CustomForm extends React.Component {
+    state={
+        person:[
+    {
+        Name:'',
+        Password: '',
+        MobileNumber:'',
+        City:'',
+		Pincode:'',
+		Address:'',
+        Profession:'Carpenter',
+        dojob:false,
+    },
+]
+}
+dojob1=()=>
+{
+    if(this.state.person[0].dojob==true)
+      {  this.state.person[0].dojob=false;
+        this.setState({person:this.state.person});}
+    else if(this.state.person[0].dojob==false)
+        {   this.state.person[0].dojob=true;
+           this.setState({person:this.state.person});
+        }
+}
+ghos=(event)=>
+{
+    this.state.person[0].Name=event.target.value;
+    this.setState({person:this.state.person});
+    
+}
+ghos2=(event)=>
+{
+    this.state.person[0].MobileNumber=event.target.value;
+    this.setState({person:this.state.person});
+}
+ghos1=(event)=>
+{
+    this.state.person[0].Password=event.target.value;
+    this.setState({person:this.state.person});
+}
+
+ghos3=(event)=>
+{
+    this.state.person[0].City=event.target.value;
+    this.setState({person:this.state.person});
+}
+gohs4=(event)=>
+{
+    this.state.person[0].Profession=event.target.value;
+    this.setState({person:this.state.person});
+}
+ghos5=(event)=>
+{
+    this.state.person[0].Pincode=event.target.value;
+    this.setState({person:this.state.person});
+}
+
+ghos6=(event)=>
+{
+    this.state.person[0].Address=event.target.value;
+    this.setState({person:this.state.person});
+}
+render() { 
+    return (
+        <div class="divstyle1" style={{color:"white", backgroundColor:"#4D4D4D", padding:"30px", fontSize:"30px"}}>
+    <div class="divStyle" style={{position:"relative"}}>
+        <form action="http://localhost:3000/signup" method="POST">
+	  <br/>
+      <Userpro person={this.state.person} dojob1={this.dojob1} />
+         Name    
+        <input
+        type="text"
+        className="input" value={this.state.person[0].Name} onChange={this.ghos}
+        placeholder="Enter Name" minLength="1" pattern="[A-Z]{1}[A-Za-z]*" required
+        name="Name" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 185px" }}/>
+        <br/>
+		Password
+		<input
+        value={this.state.person[0].Password} onChange={this.ghos1}
+        type="text" minLength="5" pattern="[A-Za-z]*" required 
+        className="input"
+        placeholder="Enter Password"
+        name="Password" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 145px" }} />
+		 <br/>
+		 Mobile Number
+       <input
+       value={this.state.person[0].MobileNumber} onChange={this.ghos2}
+        type="text" minLength="10" maxLength="10" pattern="[6-9]{1}[0-9]{9}" required
+        className="input"
+        placeholder="Enter Mobile Number"
+        name="MobileNumber" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 65px" }}/>
+		 <br/>
+        City
+       <input
+       value={this.state.person[0].City} onChange={this.ghos3}
+        type="text" minLength="1" pattern="[A-Z]{1}[A-Za-z]*" required
+        className="input"
+        placeholder="Enter City"
+        name="City" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 205px" }} />
+		 <br/>
+        Pin Code
+       <input
+       value={this.state.person[0].Pincode} onChange={this.ghos5}
+        type="number" minLength="1" pattern="[0-9]{6}" required
+        className="input"
+        placeholder="Enter pincode"
+        name="Pincode" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 150px" }}/>
+		 <br/>
+       <textarea
+       value={this.state.person[0].Address} onChange={this.ghos6}
+        type="textarea" rows="4" pattern="[A-Z]{1}[A-Za-z]*" required
+        className="input"
+        placeholder="Enter Address"
+        name="Address" style={{ width:"350px", height:"200px", fontSize:"30px", margin: "20px 265px" }} />
+        <Whatdo person={this.state.person} gohs4={this.gohs4}/>
+        <Gotoprofile person={this.state.person}/>
+        </form>
+        <a href="/">
+        <button style={cancelbuttonstyle}>Cancel</button></a>
+        </div>
+        </div>);
+        }
+   }
+        ReactDOM.render(<CustomForm/>, document.getElementById('mydiv1223'))
+    </script>
+  </body>
+</html>

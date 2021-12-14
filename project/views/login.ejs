@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <style>
+        <%- include("../public/App.css")%>
+        </style>
+  </head>
+  <body>
+      <% console.log(i) %>
+    <div id="mydiv1223"></div>
+    <script type="text/babel">
+        var auth= <%= i %>;
+        console.log(auth);
+const submitbuttonstyle={
+    backgroundColor:'light grey',
+    color:'white',
+    fontSize:"20px",
+    margin: '20px',
+    padding: '20px 45px'
+}
+const cancelbuttonstyle={
+    backgroundColor:'Gray',
+    color:'White',
+    margin: '20px',
+    fontSize:"20px",
+    padding: '20px 45px',
+    position:'relative',
+    left:"32%",
+    bottom:95,
+
+}
+class Gotoprofil extends React.Component{
+    render()
+    {
+     var re = new RegExp("[A-Z]{1}[A-Za-z]*");
+     var re2= new RegExp("[A-Za-z]*");
+     var re3= new RegExp("[0-9]{10}");
+        if(re3.test((this.props.person[0].MobileNumber)) && re2.test(this.props.person[0].Password))
+        {
+            return(
+ <button style={submitbuttonstyle}>Login</button>
+ )
+}
+else
+{
+    return(<button style={submitbuttonstyle} disabled>Login</button>)
+}
+}
+}
+function wrong(auth){
+        if(auth==1)
+        alert("wrong username/password");
+    }
+class CustomForm extends React.Component {
+    state = {
+            person: [{
+                MobileNumber: '',
+                Password: '',
+                Role:'User',
+            }]
+    } 
+    hand1=(event)=>
+    {
+        this.state.person[0].MobileNumber=event.target.value;
+    this.setState({person:this.state.person});
+    }
+    hand2=(event)=>
+    {
+        this.state.person[0].Password=event.target.value;
+    this.setState({person:this.state.person});
+    }    
+    hand3=(event)=>
+    {
+        this.state.person[0].Role=event.target.value;
+    this.setState({person:this.state.person});
+    }        
+    render() { 
+    return (
+        <div class="divstyle1" style={{color:"white", backgroundColor:"#4D4D4D", padding:"30px"}}>
+    <div class="divStyle">
+    <form action="http://localhost:3000/login" method="POST">
+    Login As
+    <select name="Role" 
+    className="input" value={this.state.person[0].Role} onChange={this.hand3} style={{ width:"350px", height:"40px", fontSize:"30px", margin: "0px 65px" }}>
+   <option value="User">User</option>
+  </select>  
+  <br/>
+     Mobile Number
+     <input type="text" pattern="[0-9]{10}" required
+    className="input"
+    value={this.state.person[0].MobileNumber} onChange={this.hand1}    
+    placeholder="Enter Mobile Number"
+    name="MobileNumber" style={{width:"350px", height:"40px", fontSize:"30px", margin: "30px 30px"}} />
+     <br/>
+     Password
+    <input type="text" pattern="[A-Za-z]*"
+    className="input" value={this.state.person[0].Password} onChange={this.hand2}
+    placeholder="Enter Password"
+    name="Password" style={{width:"350px", height:"40px", fontSize:"30px", margin: "15px 65px"}}/>
+     <br/> 
+     <Gotoprofil person={this.state.person}/>
+    </form> 
+    <a href="/">
+    <button style={cancelbuttonstyle}>Cancel</button></a>
+    </div></div>)
+    }
+}
+wrong(auth);
+ReactDOM.render(<CustomForm/>, document.getElementById('mydiv1223'))
+    </script>
+  </body>
+</html>
