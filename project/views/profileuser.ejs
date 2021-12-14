@@ -1,0 +1,438 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile:User</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="App.css"> -->
+    <style>
+    <%- include("../public/App.css")%>
+    </style>
+  </head>
+  <body>
+    <div id="mydiv1223"></div>
+    <script type="text/babel">
+        let prof= '<%- i %>';
+        let jo= '<%- j %>';
+        let pord= '<%- k %>';
+      prof=JSON.parse(prof);
+      jo=JSON.parse(jo);
+      pord=JSON.parse(pord);
+      console.log(pord);
+      console.log(prof);
+      let ur="http://localhost:3000/ProfileUser/"+jo;
+      console.log(ur);
+      let carpenters=[];
+      let painters=[]; let plumbers=[];let saloons=[];let electricians=[];
+      for(var i=0;i<prof.length;i++)
+      {
+        if(prof[i].Profession=='Carpenter')
+        carpenters.push(prof[i])
+        else if(prof[i].Profession=='Electrician')
+        electricians.push(prof[i])
+        else if(prof[i].Profession=='Plumber')
+        plumbers.push(prof[i])
+        else if(prof[i].Profession=='Salon')
+        saloons.push(prof[i])
+        else 
+        painters.push(prof[i])
+      }
+        class Opening extends React.Component{
+    Stylee=(ths)=>{
+        for(var i=0;i<ths.length;i++)
+        {if(ths[i].status)
+          {if(i===6)
+            {return (
+            <div>
+            <h1>{ths[i].job}</h1>
+            <span><div style={{position:"relative",bottom:50, left:"50%"}}>
+                <button>+ Add Review</button></div></span></div>)}
+            return (<h1>{ths[i].job}</h1>
+            );
+          }
+          }
+        }
+    render()
+    {
+      return(
+        <div class="myDiv" style={{backgroundColor:"rgb(57, 61, 65)",color:'white'}}>
+        <span>
+            <div style={{width:500,backgroundColor:"rgb(57, 61, 65)"}}>
+          <span class="title1" style={{float:'left',color:'lightblue'}}>Home governance</span></div>
+          <div style={{position:"relative", left:200,width:700,backgroundColor:"rgb(57, 61, 65)"}}>
+              <span>{this.Stylee(this.props.lists)}</span>
+        </div>  
+            <a href="/">
+            <div style={{position:"relative", bottom:70,right:"5%",color:"white",backgroundColor:"rgb(57, 61, 65)", float:"right",}}>
+                <h3>Logout</h3>
+            </div>
+            </a>
+          </span>
+        </div>
+      );
+    }
+  }
+  const imgsgs={
+    float:'left',
+    width:50,
+  height:50,
+  }
+  class Side extends React.Component{
+      Stylee=(k)=>{
+          if(this.props.lists[k-1].status)
+          {
+            return {backgroundColor:"yellow", color:"black"};
+          }
+          else
+          {
+            return {backgroundColor:"rgb(57,61,65)", color:"white"};
+          }
+
+      }
+      render()
+      {
+          return(
+              <div class="myDiv" align="centre" style={{width:300 ,height:1000, backgroundColor:"rgb(57, 61, 65)", color:"white"}}>
+                  <div style={{height:50} ,this.Stylee(1)} onClick={this.props.clicker.bind(this,1)}>
+                      <br/>
+                      Carpenters
+                  </div>
+                  <div style={{height:50}, this.Stylee(2)} onClick={this.props.clicker.bind(this,2)}>
+                  <br/>
+                      Painters
+                  </div>
+                  <div style={{height:50}, this.Stylee(3)}  onClick={this.props.clicker.bind(this,3)}>
+                  <br/>
+                      Plumbers
+                  </div>
+                  <div style={{height:50}, this.Stylee(4)} onClick={this.props.clicker.bind(this,4)}>
+                  <br/>
+                      Saloon
+                  </div>
+                  <div style={{height:50}, this.Stylee(5)} onClick={this.props.clicker.bind(this,5)}>
+                  <br/>
+                      Electrician
+                  </div>
+                  <div style={{height:50}, this.Stylee(6)} onClick={this.props.clicker.bind(this,6)}>
+                  <br/>
+                      My Orders
+                  </div>
+              </div>
+          );
+      }
+  }
+  class Display extends React.Component{
+      render()
+      { 
+          return(<div style={{width:0, height:0}}> <div style={{position:"relative", top:200, left:150, backgroundColor:'rgb(196, 196, 196)', width:150, padding:10, border:"solid"}}>
+             <p style={{fontSize:20}}><b>NAME</b>:{this.props.disp[this.props.position].Name}</p>
+             <hr/>
+             <p style={{fontSize:20}}><b>Mobile number</b>:  {this.props.disp[this.props.position].MobileNumber}</p>
+             <hr/>
+             <p style={{fontSize:20}}><b>City</b>:  {this.props.disp[this.props.position].City}</p>
+             <hr/>
+             <a href={ur+"/" +this.props.disp[this.props.position].MobileNumber+ "/order"}>
+             <button>BOOK</button></a>
+             </div>
+             <div style={{position:"relative", top:-65, left:400, backgroundColor:'rgb(196, 196, 196)', width:150, padding:10, border:"solid"}}>
+            <p style={{fontSize:20}}><b>NAME</b>:{this.props.disp[this.props.position +1].Name}</p>
+            <hr/>
+            <p style={{fontSize:20}}><b>Mobile number</b>:  {this.props.disp[this.props.position  +1].MobileNumber}</p>
+            <hr/>
+            <p style={{fontSize:20}}><b>City</b>:  {this.props.disp[this.props.position+1].City}</p>
+            <hr/>
+            <a href={ur+"/" +this.props.disp[this.props.position+1].MobileNumber+ "/order"}>
+            <button>BOOK</button></a>
+        </div>
+            <div style={{position:"relative", top:-330, left:650,  backgroundColor:'rgb(196, 196, 196)', width:150, padding:10, border:"solid"}}>
+            <p style={{fontSize:20}}><b>NAME    </b>:{this.props.disp[this.props.position +2].Name}</p>
+            <hr/>
+            <p style={{fontSize:20}}><b>Mobile number</b>:  {this.props.disp[this.props.position+2].MobileNumber}</p>
+            <hr/>
+            <p style={{fontSize:20}}><b>City</b>:  {this.props.disp[this.props.position+2].City}</p>
+            <hr/>
+            <a href={ur+"/" +this.props.disp[this.props.position+2].MobileNumber+ "/order"}>
+             <button>BOOK</button></a>
+        </div>
+        </div>)
+      }
+  }
+class Carpenters extends React.Component{
+    state={
+        position:0,
+    }
+    lesser=()=>
+    {
+        if(this.state.position>0)
+        {this.state.position-=1;
+            this.setState({position:this.state.position})}
+    }
+    incre=()=>
+    {
+        if(this.state.position<carpenters.length-3)
+        {this.state.position+=1;
+            this.setState({position:this.state.position})}
+    }
+    render()
+    {
+        return(
+            <div style={{position:"relative", bottom:1200,left:400, height:0}}>
+                <span>
+                    {console.log(carpenters)}
+                <button style={{position:"relative", top:300}} onClick={this.lesser}>LEFT</button>
+                <Display position={this.state.position} disp={carpenters}/>
+                <button style={{position:"relative", top:300, left:900}} onClick={this.incre}>RIGHT</button> </span>
+            </div>
+        );
+    }
+}
+class Painters extends React.Component{
+    state={
+        position:0,
+    }
+    lesser=()=>
+    {
+        if(this.state.position>0)
+        {this.state.position-=1;
+            this.setState({position:this.state.position})}
+    }
+    incre=()=>
+    {
+        if(this.state.position<painters.length-3)
+        {this.state.position+=1;
+            this.setState({position:this.state.position})}
+    }
+    render()
+    {
+        return(
+            <div style={{position:"relative", bottom:1200,left:400}}>
+                <span>
+                <button style={{position:"relative", top:300}} onClick={this.lesser}>LEFT</button>
+                <Display position={this.state.position} disp={painters}/>
+                <button style={{position:"relative", top:300, left:900}} onClick={this.incre}>RIGHT</button> </span>
+            </div>
+        );
+    }
+}
+class Plumbers extends React.Component{
+    state={
+        position:0,
+    }
+    lesser=()=>
+    {
+        if(this.state.position>0)
+        {this.state.position-=1;
+            this.setState({position:this.state.position})}
+    }
+    incre=()=>
+    {
+        if(this.state.position<plumbers.length-3)
+        {this.state.position+=1;
+            this.setState({position:this.state.position})}
+    }
+    render()
+    {
+        return(
+            <div style={{position:"relative", bottom:1200,left:400}}>
+                <span>
+                <button style={{position:"relative", top:300}} onClick={this.lesser}>LEFT</button>
+                <Display position={this.state.position} disp={plumbers}/>
+                <button style={{position:"relative", top:300, left:900}} onClick={this.incre}>RIGHT</button> </span>
+            </div>
+        );
+    }
+}
+class Saloon extends React.Component{
+    state={
+        position:0,
+    }
+    lesser=()=>
+    {
+        if(this.state.position>0)
+        {this.state.position-=1;
+            this.setState({position:this.state.position})}
+    }
+    incre=()=>
+    {
+        if(this.state.position<saloons.length-3)
+        {this.state.position+=1;
+            this.setState({position:this.state.position})}
+    }
+    render()
+    {
+        return(
+            <div style={{position:"relative", bottom:1200,left:400}}>
+                <span>
+                <button style={{position:"relative", top:300}} onClick={this.lesser}>LEFT</button>
+                <Display position={this.state.position} disp={saloons}/>
+                <button style={{position:"relative", top:300, left:900}} onClick={this.incre}>RIGHT</button> </span>
+            </div>
+        );
+    }
+}
+class Electrician extends React.Component{
+    state={
+        position:0,
+    }
+    lesser=()=>
+    {
+        if(this.state.position>0)
+        {this.state.position-=1;
+            this.setState({position:this.state.position})}
+    }
+    incre=()=>
+    {
+        if(this.state.position<electricians.length-3)
+        {this.state.position+=1;
+            this.setState({position:this.state.position})}
+    }
+    render()
+    {
+        return(
+            <div style={{position:"relative", bottom:1200,left:400}}>
+                <span>
+                <button style={{position:"relative", top:300}} onClick={this.lesser}>LEFT</button>
+                <Display position={this.state.position} disp={electricians}/>
+                <button style={{position:"relative", top:300, left:900}} onClick={this.incre}>RIGHT</button> </span>
+            </div>
+        );
+    }
+}
+class Order extends React.Component{
+    render()
+    {const carpenter = pord.map((car) =>  (<tr style={{border:"solid black"}}>
+      <td style={{border:"solid black",textAlign:"center"}}>{car.promobilenumber}</td><td style={{border:"solid black",textAlign:"center"}}>{car.problem}</td></tr>))
+      return(
+        <div class="myDiv" style={{backgroundColor:"white", position:"relative", bottom:1000, width:"60%", left:400}}><h1><b>Orders</b></h1>
+            <table style={{border:"solid black", width:"100%"}}>
+              <tr  style={{border:"solid black"}}>
+                <th style={{border:"solid black"}}>Pro Mobile Number</th>
+                <th style={{border:"solid black"}}>problem</th>
+                </tr>
+                {carpenter}
+              </table>
+            </div>
+      )
+  }
+
+}
+class Dis extends React.Component{
+    render()
+    {
+        for(var k=0;k<this.props.lists.length;k++)
+        {if(this.props.lists[k].status)
+        {if(k===0)
+            {return(<Carpenters/>
+        );}
+        else if(k===1)
+        {
+            return(<Painters/>
+                );
+        }
+        else if(k===2)
+        {
+            return(<Plumbers/>
+                );
+        }
+        else if(k===3)
+        {
+            return(<Saloon/>
+                );
+        }
+        else if(k===4)
+        {
+            return(<Electrician/>
+                );
+        }
+        else if(k===5)
+        {
+            return(<Order/>
+                );
+        }
+        }
+    }
+}
+}
+
+class Main extends React.Component{
+    state={
+        i:1,
+    lists:[
+        {
+            id:1,
+            job:"Carpenters",
+            status:true,
+        },
+        {
+            id:2,
+            job:"Painters",
+            status:false,
+        },
+        {
+            id:3,
+            job:"Plumbers",
+            status:false,
+        },
+        {
+            id:4,
+            job:"Saloon",
+            status:false,
+        },
+        {
+            id:5,
+            job:"Electricians",
+            status:false,
+        },
+        {
+            id:6,
+            job:"My Orders",
+            status:false,
+        },
+    ]
+    }
+    afterclick=(j)=>
+    {
+        var k=0;
+        while(k<this.state.lists.length)
+        {
+            if(this.state.lists[k].status===true & this.state.lists[k].id!=j )
+            {
+                this.state.lists[k].status=false;
+                this.setState({lists:this.state.lists})
+            }
+            k++;
+        }
+        console.log(this.state.lists);
+    }
+    clicker=(j)=>
+    {
+        for(var k=0;k<this.state.lists.length;k++)
+        {
+            if(this.state.lists[k].id===j & this.state.lists[k].status===false)
+            {
+                this.state.lists[k].status=true;
+                this.setState({lists:this.state.lists})
+            }
+        }
+        this.afterclick(j);
+    }
+    render()
+    {
+        return(
+            <div>
+                <Opening lists={this.state.lists}/>
+                <Side clicker={this.clicker} lists={this.state.lists}/>
+                <Dis lists={this.state.lists}/>
+            </div>
+        );
+    }
+}
+       ReactDOM.render(<Main/>, document.getElementById('mydiv1223'))
+    </script>
+  </body>
+</html>

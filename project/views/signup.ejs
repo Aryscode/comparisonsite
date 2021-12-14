@@ -18,17 +18,15 @@
     <script type="text/babel">
         const submitbuttonstyle={
     backgroundColor:'light grey',
-    color:'white',
-    margin: '35px 35px 5px 20px',
-    padding: '20px 45px',
-    fontSize:"20px"
+    color:'black',
+    margin: '5px 35px 5px 20px',
+    padding: '10px 25px 10px 25px'
 }
 const cancelbuttonstyle={
     backgroundColor:'Gray',
     color:'White',
     margin: '20px',
-    fontSize:"20px",
-    padding: '20px 45px',
+    padding: '10px 25px 10px 25px',
     position:'relative',
     left:"32%",
     bottom:80,
@@ -40,7 +38,11 @@ class Whatdo extends React.Component {
         <div>What Do You Do?
             <select name="Profession" 
            class="input" value={this.props.person[0].Profession} onChange={this.props.gohs4}>
-         
+          <option value="Carpenter">Carpenter</option>
+           <option value="Electrician">Electrician</option>
+           <option value="Plumber">Plumber</option>
+           <option value="Salon">Salon</option>
+           <option value="Painter">Painter</option>
          </select>
          </div>)}
     }
@@ -60,6 +62,7 @@ class Userpro extends React.Component{
 		<select name="Role" onChange={this.props.dojob1} 
 		class="input">
        <option value="User">User</option>
+        <option value="Professional">Professional</option>
       </select>
     </div>)
 }
@@ -147,7 +150,7 @@ ghos6=(event)=>
 }
 render() { 
     return (
-        <div class="divstyle1" style={{color:"white", backgroundColor:"#4D4D4D", padding:"30px", fontSize:"30px"}}>
+        <div class="divstyle1" style={{color:"white"}}>
     <div class="divStyle" style={{position:"relative"}}>
         <form action="http://localhost:3000/signup" method="POST">
 	  <br/>
@@ -157,15 +160,15 @@ render() {
         type="text"
         className="input" value={this.state.person[0].Name} onChange={this.ghos}
         placeholder="Enter Name" minLength="1" pattern="[A-Z]{1}[A-Za-z]*" required
-        name="Name" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 185px" }}/>
+        name="Name" />
         <br/>
 		Password
 		<input
         value={this.state.person[0].Password} onChange={this.ghos1}
-        type="text" minLength="5" pattern="[A-Za-z]*" required 
+        type="password" minLength="5" pattern="[A-Za-z]*" required 
         className="input"
         placeholder="Enter Password"
-        name="Password" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 145px" }} />
+        name="Password" />
 		 <br/>
 		 Mobile Number
        <input
@@ -173,7 +176,7 @@ render() {
         type="text" minLength="10" maxLength="10" pattern="[6-9]{1}[0-9]{9}" required
         className="input"
         placeholder="Enter Mobile Number"
-        name="MobileNumber" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 65px" }}/>
+        name="MobileNumber"/>
 		 <br/>
         City
        <input
@@ -181,7 +184,7 @@ render() {
         type="text" minLength="1" pattern="[A-Z]{1}[A-Za-z]*" required
         className="input"
         placeholder="Enter City"
-        name="City" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 205px" }} />
+        name="City" />
 		 <br/>
         Pin Code
        <input
@@ -189,14 +192,15 @@ render() {
         type="number" minLength="1" pattern="[0-9]{6}" required
         className="input"
         placeholder="Enter pincode"
-        name="Pincode" style={{ width:"350px", height:"40px", fontSize:"30px", margin: "20px 150px" }}/>
+        name="Pincode"/>
 		 <br/>
+        Address
        <textarea
        value={this.state.person[0].Address} onChange={this.ghos6}
         type="textarea" rows="4" pattern="[A-Z]{1}[A-Za-z]*" required
         className="input"
         placeholder="Enter Address"
-        name="Address" style={{ width:"350px", height:"200px", fontSize:"30px", margin: "20px 265px" }} />
+        name="Address" />
         <Whatdo person={this.state.person} gohs4={this.gohs4}/>
         <Gotoprofile person={this.state.person}/>
         </form>

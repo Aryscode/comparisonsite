@@ -1,0 +1,137 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+ <title>State</title>
+ <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+ <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+ <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+ <style>
+        
+    :root, body {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+width: 100%;
+height: 100%;
+font: 20 20px monaco;
+background: white;
+}
+body {
+display: grid;
+background-image: url("https://www.teahub.io/photos/full/18-187172_nature-stones-pyramid-green-leaves-sky-background-wallpaper.jpg");
+background-repeat:no-repeat;
+background-position: center, top;
+place-items: center;
+place-content: center;
+}
+#content {
+position: relative;
+display: grid;
+
+width: 210px;
+height: 70px;
+color: #fff;
+
+}
+.input {
+
+
+width: 100%;
+height: 100%;
+font: 20 20px monaco;
+border-radius: 8px;
+margin:10px 10px 10px -5px;
+
+
+text-shadow: 0px 2px 5px rgba(0,0,0,.1);
+}
+
+.divStyle{
+	background: lightblue;
+	border:3px solid green;
+	padding:30px;
+	margin: 17px;
+	border-radius: 8px;
+}
+
+</style>
+</head>
+<body>
+ 
+   
+    <div id="contents"></div>
+    <script type="text/babel">
+        let prof= '<%- i1 %>';
+        let jo= '<%- j %>';
+        let k='<%- k %>';
+      prof=JSON.parse(prof);
+      jo=JSON.parse(jo);
+      console.log(prof);
+      console.log(jo);
+      console.log(prof, jo);
+      k=JSON.parse(k);
+	const buttonstyle={
+		backgroundColor:'lightblue',
+		color:'White',
+	}
+	const submitbuttonstyle={
+		backgroundColor:'Blue',
+		color:'White',
+		margin: '5px 35px 5px 20px',
+		padding: '10px 25px 10px 25px'
+	}
+	const cancelbuttonstyle={
+		backgroundColor:'Gray',
+		color:'White',
+		margin: '20px',
+		padding: '10px 25px 10px 25px',
+        position:"relative",
+	}
+   class CustomForm extends React.Component {
+        state = {
+                    FromNumber:{prof},
+                    ToNumber:{jo},
+					Problem:''
+                }
+        ghos6=(event)=>{
+            console.log(event.target.value)
+            this.setState({Problem:event.target.value})
+        }
+      render() 
+      { 
+		let ur="http://localhost:3000/ProfileUser/"+k+"/"+jo+"/order";
+		return (
+        <div className="divStyle" >
+        <form action={ur} method="POST">
+        <div>Orders</div>
+		<hr/>
+		 From:
+         <label>{prof}</label>
+		 <br/>
+		  To:
+         <label>{jo}</label>
+		 <br/>
+		
+		Problem:
+        <textarea
+        onChange={this.ghos6}
+        type="textarea" rows="4" pattern="[A-Z]{1}[A-Za-z]*" required
+        className="input"
+        placeholder="Enter Your Problem"
+        name="Problem" />
+         <br/>
+		<button style={submitbuttonstyle}>Submit</button>
+        </form> 
+        <a href={"http://localhost:3000/ProfileUser/"+k}>
+		<button style={cancelbuttonstyle}>Cancel</button></a>
+        </div>)
+        }
+
+    }
+ReactDOM.render(<CustomForm/>,
+document.getElementById('contents'));
+</script>
+
+</body>
+</html>

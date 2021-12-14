@@ -1,0 +1,162 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile:Pro</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <style>
+        <%- include("../public/App.css")%>
+        </style>
+  </head>
+  <body>
+    <div id="mydiv1223"></div>
+    <script type="text/babel">
+        let order= '<%- o %>';
+        order=JSON.parse(order);
+        order=order.reverse();
+        class Opening extends React.Component{
+    Stylee=(ths)=>{
+        for(var i=0;i<ths.length;i++)
+        {if(ths[i].status)
+          {
+            return (<h1>{ths[i].job}</h1>
+            );
+          }
+          }
+        }
+    render()
+    {
+      return(
+        <div class="myDiv" style={{backgroundColor:"rgb(57, 61, 65)",color:'white'}}>
+        <span>
+            <div style={{width:500,backgroundColor:"rgb(57, 61, 65)"}}>         
+          <span class="title1" style={{float:'left',color:'lightblue'}}>Home governance</span>
+          </div>
+          <div style={{position:"relative", left:200,width:700,backgroundColor:"rgb(57, 61, 65)"}}>
+              <span>{this.Stylee(this.props.lists)}</span>
+        </div>  
+        {/* <div style={{backgroundColor:"rgb(57, 61, 65)",}}>
+            {username}
+        </div> */}
+            <a href="/">
+            <div style={{position:"relative", bottom:70,right:20,color:"white",backgroundColor:"rgb(57, 61, 65)", float:"right",}}>
+                <h3>Logout</h3>
+            </div>
+            </a>
+          </span>
+        </div>
+      );
+    }
+  }
+  const imgsgs={
+    float:'left',
+    width:50,
+  height:50,
+  }
+  class Side extends React.Component{
+      Stylee=(k)=>{
+          if(this.props.lists[0].status)
+          {
+            return {backgroundColor:"yellow", color:"black"};
+          }
+      }
+      render()
+      {
+          return(
+              <div class="myDiv" align="centre" style={{width:300,height:1000, backgroundColor:"rgb(57, 61, 65)", color:"white"}}>
+                  <div style={{height:50}, this.Stylee(2)} onClick={this.props.clicker.bind(this,2)}>
+                  <br/>
+                      My Orders
+                  </div>
+              </div>
+          );
+      }
+  }
+
+class Order extends React.Component{
+    render()
+    {const carpenter = order.map((car) =>  (<tr style={{border:"solid black"}}>
+      <td style={{border:"solid black",textAlign:"center"}}>{car.userm}</td><td style={{border:"solid black",textAlign:"center"}}>{car.problem}</td></tr>))
+      return(
+        <div class="myDiv" style={{backgroundColor:"white", position:"relative", bottom:1000, width:"60%", left:400}}><h1><b>Orders</b></h1>
+            <table style={{border:"solid black", width:"100%"}}>
+              <tr  style={{border:"solid black"}}>
+                <th style={{border:"solid black"}}>User Mobile Number</th>
+                <th style={{border:"solid black"}}>problem</th>
+                </tr>
+                {carpenter}
+              </table>
+            </div>
+      )
+  }
+}
+class Dis extends React.Component{
+    render()
+    {
+        var j;
+        for(var k=0;k<this.props.lists.length;k++)
+        {if(this.props.lists[k].status)
+        if(k==0)
+        {
+            return(<Order/>
+                );
+        }
+    }
+}
+}
+class Main2 extends React.Component{
+    state={
+        i:1,
+    lists:[
+        {
+            id:2,
+            job:"Your Orders",
+            status:true,
+        },
+    ]
+    }
+    afterclick=(j)=>
+    {
+        var k=0;
+        while(k<this.state.lists.length)
+        {
+            if(this.state.lists[k].status==true & this.state.lists[k].id!=j )
+            {
+                this.state.lists[k].status=false;
+                this.setState({lists:this.state.lists})
+            }
+            k++;
+        }
+    }
+    clicker=(j)=>
+    {
+        for(var k=0;k<this.state.lists.length;k++)
+        {
+            if(this.state.lists[k].id==j & this.state.lists[k].status==false)
+            {
+                this.state.lists[k].status=true;
+                this.setState({lists:this.state.lists})
+            }
+        }
+        this.afterclick(j);
+    }
+    render()
+    {
+        return(
+            <div>
+                <Opening lists={this.state.lists}/>
+                <Side clicker={this.clicker} lists={this.state.lists}/>
+                <Dis lists={this.state.lists}/>
+            </div>
+        );
+    }
+}
+    ReactDOM.render(<Main2/>, document.getElementById('mydiv1223'))
+    </script>
+  </body>
+</html>

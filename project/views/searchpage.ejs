@@ -1,0 +1,134 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <style>
+      <%- include("../public/App.css")%>
+      </style>
+  </head>
+  <body>
+    <div id="mydiv1223"></div>
+    <script type="text/babel">
+      let prof= '<%- i %>';
+      let term= '<%- j %>';
+      prof=JSON.parse(prof);
+      term=JSON.parse(term);
+      console.log(prof);
+      let search=[];
+      for(var i=0;i<prof.length;i++)
+      {
+        if(prof[i].Name==term)
+        {
+          console.log(prof[i]);
+        search.push(prof[i]);}
+      }
+      const bgco={
+  backgroundColor:'grey',
+  height:1030,
+}
+         class Submitbutton extends React.Component{
+  render()
+  {if(this.props.term==="")
+    {return(
+  <button class="searchbutton" style={{width:80,}} disabled>Search</button>
+  )}
+  else
+  {
+    return(
+      <button class="searchbutton" style={{width:80,}}>Search</button>
+    )
+  }
+}
+}
+class Searchs extends React.Component{
+  state={
+    term:"",
+  }
+  acceptor=(event)=>
+  {
+    this.state.term=event.target.value;
+    this.setState({term:this.state.term});
+  }
+  render()
+  {
+    return(
+      <span>
+        <form action="http://localhost:3000/search" method="POST">
+          <input type="text" pattern="[A-Za-z]*" className="searchs" value={this.state.term} onChange={this.acceptor} placeholder="search" name="search"/>
+        <Submitbutton term={this.state.term}/>
+        </form>
+      </span>
+    )
+  }
+}
+class Search extends React.Component{
+  render()
+  {
+    return(
+      <div class="myDiv22">
+        <div class="myDiv223">
+        <a href="/"> 
+        <span class="title1" style={{float:'left',color:'lightblue'}}>Home governance</span>
+        </a>
+        <span>
+        <Searchs/></span>
+        <span>
+        <a href="/login"> 
+        <button style={buttonstyle}>Login </button>
+         </a>
+        <a href="/signup"> 
+        <button style={buttonstyle}>Register</button></a>
+      </span>
+      </div>
+      </div>
+    )
+  }
+}
+class Searchpage extends React.Component{
+  render()
+  {
+    const searchres = search.map((car) =>  (<tr style={{border:"solid black"}}><td style={{border:"solid black", textAlign:"center"}}>{car.Name}</td>
+      <td style={{border:"solid black",textAlign:"center"}}>{car.MobileNumber}</td><td style={{border:"solid black",textAlign:"center"}}>{car.City}</td></tr>
+    ))
+      return(
+        <div class="myDiv" style={bgco}>
+          <Search term={this.props.term} letsgo={this.props.letsgo}></Search>
+          <div class="myDiv" style={{backgroundColor:"white", position:"relative", top:100}}><h1><b>Search Results</b></h1>
+            <table style={{border:"solid black", width:"100%"}}>
+              <tr  style={{border:"solid black"}}>
+                <th style={{border:"solid black"}}>Name</th>
+                <th style={{border:"solid black"}}>Mobile Number</th>
+                <th style={{border:"solid black"}}>City</th>
+                </tr>
+                {searchres}
+              </table>
+            </div>
+          </div>
+      )
+  }
+}
+const imgsgs={
+  float:'left',
+  width:50,
+height:50,
+}
+const buttonstyle={
+  backgroundColor:'rgb(49, 54, 58)',
+  color:'White',
+  width:70,
+  position:'relative',
+  bottom:60,
+height:50,
+float:'right',
+}
+ReactDOM.render(<Searchpage/>, document.getElementById('mydiv1223'))
+    </script>
+  </body>
+</html>

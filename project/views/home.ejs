@@ -1,0 +1,422 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src='https://unpkg.com/react@16.3.1/umd/react.production.min.js'></script>
+    <script src='https://unpkg.com/react-dom@16.3.1/umd/react-dom.production.min.js'></script>
+    <script src='https://unpkg.com/react-router-dom@5.0.0/umd/react-router-dom.min.js'></script>
+    <script src='https://unpkg.com/babel-standalone@6.26.0/babel.js'></script>
+    <style>
+      <%- include("../public/App.css")%>
+    </style>
+  </head>
+  <body>
+    <div id="mydiv1223"><p>
+    </p></div>
+    <script type="text/babel">
+      let prof= '<%- i %>';
+      prof=JSON.parse(prof);
+      console.log(prof);
+      let carpenters=[];
+      let painters=[]; let plumbers=[];let saloons=[];let electricians=[];
+      for(var i=0;i<prof.length;i++)
+      {
+        if(prof[i].Profession=='Carpenter')
+        carpenters.push(prof[i])
+        else if(prof[i].Profession=='Electrician')
+        electricians.push(prof[i])
+        else if(prof[i].Profession=='Plumber')
+        plumbers.push(prof[i])
+        else if(prof[i].Profession=='Salon')
+        saloons.push(prof[i])
+        else 
+        painters.push(prof[i])
+      }
+      console.log(carpenters);
+      const Link = ReactRouterDOM.Link;
+const Route = ReactRouterDOM.Route;
+      class Submitbutton extends React.Component{
+  render()
+  {if(this.props.term==="")
+    {return(
+  <button class="searchbutton" style={{width:80,}} disabled>Search</button>
+  )}
+  else
+  {
+    return(
+      <button class="searchbutton" style={{width:80,}}>Search</button>
+    )
+  }
+}
+}
+class Searchs extends React.Component{
+  state={
+    term:"",
+  }
+  acceptor=(event)=>
+  {
+    this.state.term=event.target.value;
+    this.setState({term:this.state.term});
+  }
+  render()
+  {
+    return(
+      <span>
+        <form action="http://localhost:3000/" method="POST">
+          <input type="text" pattern="[A-Za-z]*" className="searchs" value={this.state.term} onChange={this.acceptor} placeholder="search" name="search"/>
+        <Submitbutton term={this.state.term}/>
+        </form>
+      </span>
+    )
+  }
+}
+class Search extends React.Component{
+  render()
+  {
+    return(
+      <div class="myDiv22">
+        <div class="myDiv223">
+        <Link to="/"> 
+        <span class="title1" style={{float:'left',color:'lightblue'}}>Home Governance</span>
+        </Link>
+        <span>
+        <Searchs/></span>
+        <span>
+        <a href="/login"> 
+        <button style={buttonstyle}>Login </button>
+         </a>
+        <a href="/signup"> 
+        <button style={buttonstyle}>Register</button></a>
+      </span>
+      </div>
+      </div>
+    )
+  }
+}
+class Searchpage extends React.Component{
+  render()
+  {
+      return(
+        <div class="myDiv" style={bgco}>
+        <Search></Search></div>
+      )
+  }
+}
+const imgsgs={
+  float:'left',
+  width:50,
+height:50,
+}
+const buttonstyle={
+  backgroundColor:'rgb(49, 54, 58)',
+  color:'White',
+  width:70,
+  position:'relative',
+  bottom:60,
+height:50,
+float:'right',
+}
+const buttonstyle2={
+  backgroundColor:'lightblue',
+  color:'White',
+}
+const buttonstyle1={
+  width:50,
+  height:50,
+}
+const bc2={
+  backgroundColor:'white',
+  backgroundImage:"url('https://previews.123rf.com/images/coolvectorstock/coolvectorstock1811/coolvectorstock181109949/112091018-carpenter-icon-carpenter-symbol-design-from-professions-collection-simple-element-vector-illustratio.jpg')", 
+  backgroundSize:129,
+  backgroundPosition:'centre',
+  backgroundRepeat:'no-repeat',
+}
+const bc3={
+  backgroundColor:'white',
+  backgroundImage:"url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAdVBMVEX///8AAAClpaVWVlYjIyMXFxfo6OgdHR20tLTGxsaFhYX4+Pjc3Nw/Pz+5ubnU1NRjY2MxMTFKSkrOzs6Pj4+wsLBRUVHw8PA9PT3i4uILCwvy8vJ0dHQfHx9paWkRERF7e3ubm5uTk5M2NjYtLS1GRkafn58snTunAAAESklEQVR4nO2d63aqMBBGQa0KVMVrtV56sfr+j3ikVgUJEAYyGTjf/lfWCsyuECY34jgAAAAAAACUYjIsi2c75FK8rV0CY9th6xO8UwRdd247cG0WNEG3ZztwbY5EQ7dvO3JdPqiGE9uR6/ICwyxebUeuC9nwOLqwntmOvxiy4ZUX2/EXU9FwYDv+YsiGi8nca7fh8JIPtdtwCUMjBONFuFqFi+FWuwg5p7FhOF49rn8aahYitZ0iPHbDyTQZwUCvmUptW7gBt6GfjmGnUy4gCn45zIZdVRSjQKNk/4ci+B0V5TRcqeM4ahWed8ryV5MxGipu0Suh0cvyGc6z7yajPUZ8hr2cB8bkddkMx3lVQsfghdkMZ3mGe4MX5jJ8yxM02tvAZZh7k7ru2dyVuQwL8i6tzIYGl+Eh33Bk8NJMhhn5zI0p+cSzl0Eu+33TDXUaVix9bcbu0tFFoICPnxpFMjFW01wMNzXGSafgbUFPasQYGnvjizHMz9oqVHZyDE1l3nIMzbSe5ruoo/HwVmOcdHJawLqdiinuNbSM0ezPLMEu9YyPf9qqzkDpZFQ2ej1RKsLHSXQ67Bg4qQSn9OBij7aU4exdWrBKR9tAnqHjPY+xVOpmk2h4eS/GnsbRstq5ZBo6znbsh9Ofrr+s/BaTalgfMGw+7TfcPwytZd/e1+F07Jki9tbZWUlqvILOmXrhnw88J08vIMI901KRoBmGd07JZl8cUe1wTs2fWPAzOvjxzKsVQXpLujQFPYfGMDvjIc7IkuEXl2DHkqDL1eNGnaFVGYPjyEm+LQl+cgk6xEVYFemR+1xL41UIs+uXI1aUsW2R2e+rQdnhi1jjwoiLmkG2QO2Gy3vJbyMuSirVpKWHoG43DF82c0m5WQ0vTdDReh2yroatlHObnMBXG1WqUhjK4Mlwdy6zhLeBhr5Tar1LAw2jVEq5BAGGgoEhDOUDQxjKB4YwlA8MYSgfGMJQPjCEoXxgCEP5wBCG8oEhDOUDQxjKB4YwlA8MYSgfGMJQPjCEoXzab5j8Ck00Pblthv1EyNEa8rYZOvGPNn9EB1pnGP/i1e9KndYZxhbNXFetKg3Vi6MaYnj/PJV//VNlOFSvHmqKobPxp+7Uv621Uhi+O+qlJ40xTKIwjL622U8fhqFUYAhD+cAQhvKBIQzlA0MYygeGMJQPDGEoHxjCUD4whKF8YAhD+cAQhvKBIQzlA0MYygeGMJQPDGEoHxjCUD4whKF8YAhD+cAQhvKBIQzlA0MYygeGMJQPDGEon/YbhmmTntMqw0XaZOaot4L0bMdKQ7Gb3u/my6f08a3tWImkTfrR4WXqMOdem7VyfjY5XI+nvo3xajfOCjzvRB5cDz/fvr7dKKsQJLdAvP9UyS3K+fZ+N0AQeyfuY7svx79l0+Bf8Bfv707tJV9529vG02Fzn8E7m3GnM1R4zJfnpce1sz0AAAAA/kf+AUYyTGqrBR0wAAAAAElFTkSuQmCC')", 
+  backgroundSize:117,
+  backgroundPosition:'centre',
+  backgroundRepeat:'no-repeat',
+}
+const bc4={
+  backgroundColor:'white',
+  backgroundImage:"url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmMnacQhP_UYQ_nBDMHY5pnKxO64GH0pHdlyh2YK1Qka3K_UHcs-xGnML5TZxfS74uBPM&usqp=CAU')", 
+  backgroundSize:112,
+  backgroundPosition:'centre',
+  backgroundRepeat:'no-repeat',
+}
+const bc5={
+  backgroundColor:'white',
+  backgroundImage:"url('https://static.thenounproject.com/png/80050-200.png')", 
+  backgroundSize:105,
+  backgroundPosition:'centre',
+  backgroundRepeat:'no-repeat',
+}
+const bc6={
+  backgroundColor:'white',
+  backgroundImage:"url('https://static.thenounproject.com/png/23830-200.png')", 
+  backgroundSize:105,
+  backgroundPosition:'centre',
+  backgroundRepeat:'no-repeat',
+}
+class Midsel extends React.Component{
+  Stylee=(tod)=>{
+    if(tod.btl)
+      {
+        return(<div>
+          <span><button style={buttonstyle1,{backgroundColor:'lightgray',width:60, height:60}}onClick={this.props.pushsl} id="left">left</button></span>
+          <span class="spaces"></span>
+        <div class="div23" style={bc2}><Link to="/Carpenters">
+          <h5 style={buttonstyle2}>Carpenters</h5></Link></div>
+          <span class="spaces"></span>
+          <span><div class="div23" style={bc3}><Link to="/Painters">
+          <h5 style={buttonstyle2}>Painters</h5></Link></div></span>
+          <span class="spaces"></span>
+          <span><div class="div23" style={bc4}><Link to="/Plumbers">
+          <h5 style={buttonstyle2}>Plumber</h5></Link></div></span>
+          <span class="spaces"></span>
+        
+        <span><button style={buttonstyle1,{backgroundColor:'lightgray',width:60, height:60}} id="left" onClick={this.props.pushsr}>right</button></span></div>
+        )
+      }
+        else
+        {
+          return(<div >
+            <button style={buttonstyle1,{backgroundColor:'lightgray',width:60, height:60}} id="left" onClick={this.props.pushsl}>left</button>
+            <span class="spaces"></span>
+            <div class="div23" style={bc4}><Link to="/Plumbers">
+          <h5 style={buttonstyle2} >Plumber</h5></Link></div>
+          <span class="spaces"></span>
+            <div class="div23" style={bc5}><Link to="/Saloon">
+              <h5 style={buttonstyle2}>Saloon</h5></Link></div>
+              <span class="spaces"></span>
+              <span><div class="div23" style={bc6}><Link to="/Electricians">
+              <h5 style={buttonstyle2}>Electrician</h5></Link></div></span>
+              <span class="spaces"></span>
+              <span><button style={buttonstyle1,{backgroundColor:'lightgray',width:60, height:60}} id="left" onClick={this.props.pushsr}>right</button></span>
+              </div>)
+        }
+      }
+  render()
+  {
+    return this.props.btns.map((tod)=>
+    (
+      <div>
+      <br/>
+        <br/>
+        <br/>
+      <div class="myDiv1" class="bc1">
+        <br/>
+        <p><h3><span class="spaces"></span><span class="spaces"></span><span class="spaces"></span><span class="spaces"></span><span class="spaces"></span>Home Services at Your Fingertips</h3></p>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <span>{this.Stylee(tod)}</span>
+        <span class="spaces"></span>
+      </div>
+      </div>
+    )
+    );
+}
+}
+class Reviews extends React.Component{
+  render()
+  {
+    return(
+      <div class="myDiv" style={{height:400}}>
+        <p><h1><u>Reviews</u></h1></p>
+        <div style={{display:"inline-block", border:"solid", padding:10}}><b><h2>Times of India</h2></b>
+          <p>This is the best website to order Home servics</p>
+          </div>
+          <span class="spaces"></span>
+          <span class="spaces"></span>
+          <div style={{display:"inline-block", border:"solid", padding:10}}><b><h2>Times of Africa</h2></b>
+          <p>This is a very good website, with very good user interface</p>
+          </div>
+          <span class="spaces"></span>
+          <span class="spaces"></span>
+          <div style={{display:"inline-block", border:"solid", padding:10}}><b><h2>Times of America</h2></b>
+          <p>This website is developed by team Mahesh</p>
+          </div>
+      </div>
+    )
+  }
+}
+const leftalign={
+  float:'left',
+}
+const rightalign={
+  float:'right',
+}
+const bgco={
+  backgroundColor:'grey',
+  height:1030,
+}
+class AppHome extends React.Component{
+  state={
+btns:[
+{
+  btl:true,
+btr:false,
+},
+]
+}
+pushsl=()=>
+{
+  this.state.btns[0].btl=true;
+  this.state.btns[0].btr=false;
+  this.setState({btns:this.state.btns})
+}
+pushsr=()=>
+{
+  this.state.btns[0].btl=false;
+  this.state.btns[0].btr=true;
+  this.setState({btns:this.state.btns})
+}
+  render(){
+  return(
+    <div class="myDiv" style={bgco}>
+      <Search term={this.props.term} letsgo={this.props.letsgo}/>
+    <Midsel btns={this.state.btns} pushsl={this.pushsl} pushsr={this.pushsr}/>
+    <Reviews/>
+    <h6 style={leftalign}>Copyrights belong to no one</h6>
+    <br></br>
+    <h6 style={rightalign}>About Us @Mahesh.Shripad.org</h6>
+    <br></br>
+    </div>
+  );
+}
+}
+class Pain extends React.Component{
+  render()
+  {const carpenter = painters.map((car) =>  (<tr style={{border:"solid black"}}><td style={{border:"solid black", textAlign:"center"}}>{car.Name}</td>
+      <td style={{border:"solid black",textAlign:"center"}}>{car.MobileNumber}</td><td style={{border:"solid black",textAlign:"center"}}>{car.City}</td></tr>))
+      return(
+        <div class="myDiv" style={bgco}>
+        <Search term={this.props.term} letsgo={this.props.letsgo}></Search>
+        <div class="myDiv" style={{backgroundColor:"white", position:"relative", top:100}}><h1><b>Painters</b></h1>
+            <table style={{border:"solid black", width:"100%"}}>
+              <tr  style={{border:"solid black"}}>
+                <th style={{border:"solid black"}}>Name</th>
+                <th style={{border:"solid black"}}>Mobile Number</th>
+                <th style={{border:"solid black"}}>City</th>
+                </tr>
+                {carpenter}
+              </table>
+            </div>
+        </div>
+      )
+  }
+}
+class Plum extends React.Component{
+  render()
+  {const carpenter = plumbers.map((car) =>  (<tr style={{border:"solid black"}}><td style={{border:"solid black", textAlign:"center"}}>{car.Name}</td>
+      <td style={{border:"solid black",textAlign:"center"}}>{car.MobileNumber}</td><td style={{border:"solid black",textAlign:"center"}}>{car.City}</td></tr>))
+      return(
+        <div class="myDiv" style={bgco}>
+        <Search term={this.props.term} letsgo={this.props.letsgo}></Search>
+        <div class="myDiv" style={{backgroundColor:"white", position:"relative", top:100}}><h1><b>Pumbers</b></h1>
+            <table style={{border:"solid black", width:"100%"}}>
+              <tr  style={{border:"solid black"}}>
+                <th style={{border:"solid black"}}>Name</th>
+                <th style={{border:"solid black"}}>Mobile Number</th>
+                <th style={{border:"solid black"}}>City</th>
+                </tr>
+                {carpenter}
+              </table>
+            </div>
+        </div>
+      )
+  }
+}
+class Carpen extends React.Component{
+        render()
+  {
+    const carpenter = carpenters.map((car) =>  (<tr style={{border:"solid black"}}><td style={{border:"solid black", textAlign:"center"}}>{car.Name}</td>
+      <td style={{border:"solid black",textAlign:"center"}}>{car.MobileNumber}</td><td style={{border:"solid black",textAlign:"center"}}>{car.City}</td></tr>
+    ))
+      return(
+        <div class="myDiv" style={bgco}>
+          <Search term={this.props.term} letsgo={this.props.letsgo}></Search>
+          <div class="myDiv" style={{backgroundColor:"white" , position:"relative", top:100}}><h1><b>Carpenters</b></h1>
+            <table style={{border:"solid black", width:"100%"}}>
+              <tr  style={{border:"solid black"}}>
+                <th style={{border:"solid black"}}>Name</th>
+                <th style={{border:"solid black"}}>Mobile Number</th>
+                <th style={{border:"solid black"}}>City</th>
+                </tr>
+                {carpenter}
+              </table>
+            </div>
+          </div>
+      )
+  }
+}
+class Elect extends React.Component{
+  render()
+  {const carpenter = electricians.map((car) =>  (<tr style={{border:"solid black"}}><td style={{border:"solid black", textAlign:"center"}}>{car.Name}</td>
+      <td style={{border:"solid black",textAlign:"center"}}>{car.MobileNumber}</td><td style={{border:"solid black",textAlign:"center"}}>{car.City}</td></tr>))
+      return(
+        <div class="myDiv" style={bgco}>
+        <Search term={this.props.term} letsgo={this.props.letsgo}></Search>
+        <div class="myDiv" style={{backgroundColor:"white", position:"relative", top:100}}><h1><b>Electricians</b></h1>
+            <table style={{border:"solid black", width:"100%"}}>
+              <tr  style={{border:"solid black"}}>
+                <th style={{border:"solid black"}}>Name</th>
+                <th style={{border:"solid black"}}>Mobile Number</th>
+                <th style={{border:"solid black"}}>City</th>
+                </tr>
+                {carpenter}
+              </table>
+            </div>
+        </div>
+      )
+  }
+}
+class Salo extends React.Component{
+  render()
+  {const carpenter = saloons.map((car) =>  (<tr style={{border:"solid black"}}><td style={{border:"solid black", textAlign:"center"}}>{car.Name}</td>
+      <td style={{border:"solid black",textAlign:"center"}}>{car.MobileNumber}</td><td style={{border:"solid black",textAlign:"center"}}>{car.City}</td></tr>))
+      return(
+        <div class="myDiv" style={bgco}>
+        <Search term={this.props.term} letsgo={this.props.letsgo}></Search>
+        <div class="myDiv" style={{backgroundColor:"white", position:"relative", top:100}}><h1><b>Saloon</b></h1>
+            <table style={{border:"solid black", width:"100%"}}>
+              <tr  style={{border:"solid black"}}>
+                <th style={{border:"solid black"}}>Name</th>
+                <th style={{border:"solid black"}}>Mobile Number</th>
+                <th style={{border:"solid black"}}>City</th>
+                </tr>
+                {carpenter}
+              </table>
+            </div>
+        </div>
+      )
+  }
+}
+class App extends React.Component{
+    render()
+    {
+      return(
+        <ReactRouterDOM.BrowserRouter>
+      <Route path="/" exact component={AppHome}/>
+    <Route path="/Carpenters" exact component={Carpen}/>
+      <Route path="/Plumbers" exact component={Plum}/>
+    <Route path="/Painters" exact component={Pain}/> 
+    <Route path="/Saloon" exact component={Salo}/>
+      <Route path="/Electricians" exact component={Elect}/>
+    </ReactRouterDOM.BrowserRouter>
+)
+}
+}
+      ReactDOM.render(<App/>, document.getElementById('mydiv1223'))
+    </script>
+  </body>
+</html>
+
